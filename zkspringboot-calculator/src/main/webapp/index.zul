@@ -1,0 +1,135 @@
+<zk title="Calculator">
+	<style>
+		body { 
+			background: url("images/background.png");
+			background-repeat: no-repeat; 
+		}
+
+		.z-window, .z-window-noborder, .z-window-overlapped,
+		.z-window-shadow, .z-window-content {
+			 background: #white;
+			 opacity: 0.9;
+		}
+
+		.textinput{ 
+			width: 150px; 
+			height: 50px; 
+			font-size: 20px;
+			font-weight: normal;
+            font-style: normal;
+			background-color: #ffffff; 
+			border-style :none; 
+			border-width : 1px;
+			border: 1px solid #ffbb00;
+		    padding: 5px 0px 5px 25px; 
+	    }
+
+		.textinputresult{ 
+			width: 150px; 
+			height: 50px; 
+			font-size: 20px;
+			font-weight: bold; 
+			color:#ffbb00; 
+			background-color: #ffbb00;
+			border-style : none; 
+		} 
+		
+		.selectinput{ 
+			font-size: 40px; 
+			color: #ffbb00; 
+			border-style : none; 
+		} 
+		
+		.text_expresions{ 
+			width: 365px;
+			height: 50px; 
+			font-size: 20px; 
+			font-weight: normal;
+            font-style: normal; 
+			border-style :none;
+			padding: 5px 20px 5px 26px; 
+			border: 1px solid #ffbb00;
+		} 
+		
+		.lbl_title{ 
+			color: #007999; 
+			font-size: 30px; 
+			font-weight: bold; 
+		}
+
+
+	</style>
+	<window border="normal" mode="overlapped" position="center"
+		height="700px" sclass="warning"
+		apply="org.zkoss.zkspringboot.calculator.CalculatorController">
+
+		<div align="center">
+			<hbox>
+				<label value="Calculator" sclass="lbl_title" />
+			</hbox>
+			<separator spacing="20px" sclass="texto" />
+		</div>
+		<div align="left">
+
+			<hbox>
+				<label value="Introduce the Numbers"
+					style="font-size: 30px;color:#007999" />
+			</hbox>
+		</div>
+		<div>
+
+			<hbox>
+
+				<intbox id="txt_number1" sclass="textinput"
+					constraint="no negative,no zero" placeholder="Number 1" />
+				<selectbox id="sel_operation" zclass="selectinput"
+					width="50px" height="50px" model="${model}">
+					<template name="model">
+						<label value="${each}" />
+					</template>
+				</selectbox>
+				<intbox id="txt_number2" sclass="textinput"
+					constraint="no negative,no zero" placeholder="Number 2" />
+				<button id="btn_calculate" label="=" width="50px"
+					height="50px" />
+				<textbox id="txt_result" sclass="textinputresult"
+					readonly="true" style="color:red" placeholder="Result" />
+			</hbox>
+			<separator spacing="20px" sclass="texto" />
+			<div visible="true">
+				<hbox>
+					<label value=" Expression"
+						style="font-size: 30px;color:#007999" />
+				</hbox>
+				<hbox>
+					<textbox id="txt_expresion" sclass="text_expresions"
+						placeholder="3+4*3" />
+					<button id="btn_calculate_expresion" label="="
+						width="50px" height="50px" />
+					<textbox id="txt_result_expresion"
+						sclass="textinputresult" placeholder="Result" style="color:red"
+						readonly="true" />
+				</hbox>
+			</div>
+		</div>
+		<div align="center">
+			<vbox>
+				<separator spacing="20px" />
+				<listbox id="listbox_expresions" width="550px"
+					height="300px" mold="paging" pageSize="4">
+					<listhead>
+						<listheader label="Expresion" width="400px"></listheader>
+						<listheader label="Time" width="145px"></listheader>
+					</listhead>
+					<template name="model">
+						<listitem>
+							<listcell label="${each.expresion }" />
+							<listcell label="${each.time }" />
+						</listitem>
+					</template>
+				</listbox>
+			</vbox>
+		</div>
+
+	</window>
+</zk>
